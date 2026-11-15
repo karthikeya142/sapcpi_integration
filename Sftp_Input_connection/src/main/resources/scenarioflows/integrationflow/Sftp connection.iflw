@@ -101,7 +101,7 @@
                 </ifl:property>
                 <ifl:property>
                     <key>fileName</key>
-                    <value>test.xml</value>
+                    <value/>
                 </ifl:property>
                 <ifl:property>
                     <key>Description</key>
@@ -161,7 +161,7 @@
                 </ifl:property>
                 <ifl:property>
                     <key>path</key>
-                    <value>/output</value>
+                    <value>/input</value>
                 </ifl:property>
                 <ifl:property>
                     <key>proxyPort</key>
@@ -201,7 +201,7 @@
                 </ifl:property>
                 <ifl:property>
                     <key>fileAppendTimeStamp</key>
-                    <value>0</value>
+                    <value>1</value>
                 </ifl:property>
                 <ifl:property>
                     <key>credential_name</key>
@@ -313,7 +313,7 @@
                 </ifl:property>
                 <ifl:property>
                     <key>regex_filter</key>
-                    <value>0</value>
+                    <value>1</value>
                 </ifl:property>
                 <ifl:property>
                     <key>host</key>
@@ -333,7 +333,7 @@
                 </ifl:property>
                 <ifl:property>
                     <key>fastExistsCheck</key>
-                    <value>1</value>
+                    <value>0</value>
                 </ifl:property>
                 <ifl:property>
                     <key>ComponentSWCVId</key>
@@ -417,7 +417,7 @@
                 </ifl:property>
                 <ifl:property>
                     <key>noop</key>
-                    <value>delete</value>
+                    <value>move</value>
                 </ifl:property>
                 <ifl:property>
                     <key>doneFileName</key>
@@ -693,7 +693,7 @@ File Recieved in th e MAil Notification</value>
                 </bpmn2:extensionElements>
             </bpmn2:errorEventDefinition>
         </bpmn2:endEvent>
-        <bpmn2:endEvent id="EndEvent_2" name="End">
+        <bpmn2:endEvent id="EndEvent_2" name="file End ">
             <bpmn2:extensionElements>
                 <ifl:property>
                     <key>componentVersion</key>
@@ -704,9 +704,10 @@ File Recieved in th e MAil Notification</value>
                     <value>ctype::FlowstepVariant/cname::MessageEndEvent/version::1.1.0</value>
                 </ifl:property>
             </bpmn2:extensionElements>
+            <bpmn2:incoming>SequenceFlow_40</bpmn2:incoming>
             <bpmn2:messageEventDefinition/>
         </bpmn2:endEvent>
-        <bpmn2:endEvent id="EndEvent_12" name="End 2">
+        <bpmn2:endEvent id="EndEvent_12" name="Mail End 2">
             <bpmn2:extensionElements>
                 <ifl:property>
                     <key>componentVersion</key>
@@ -717,7 +718,7 @@ File Recieved in th e MAil Notification</value>
                     <value>ctype::FlowstepVariant/cname::MessageEndEvent/version::1.1.0</value>
                 </ifl:property>
             </bpmn2:extensionElements>
-            <bpmn2:incoming>SequenceFlow_31</bpmn2:incoming>
+            <bpmn2:incoming>SequenceFlow_42</bpmn2:incoming>
             <bpmn2:messageEventDefinition/>
         </bpmn2:endEvent>
         <bpmn2:callActivity id="CallActivity_30" name="Content Modifier 1">
@@ -754,6 +755,29 @@ File Recieved in th e MAil Notification</value>
             <bpmn2:incoming>SequenceFlow_28</bpmn2:incoming>
             <bpmn2:outgoing>SequenceFlow_31</bpmn2:outgoing>
         </bpmn2:callActivity>
+        <bpmn2:parallelGateway id="ParallelGateway_39" name="Parallel Multicast 1">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>componentVersion</key>
+                    <value>1.1</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>activityType</key>
+                    <value>Multicast</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>cmdVariantUri</key>
+                    <value>ctype::FlowstepVariant/cname::Multicast/version::1.1.1</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>subActivityType</key>
+                    <value>parallel</value>
+                </ifl:property>
+            </bpmn2:extensionElements>
+            <bpmn2:incoming>SequenceFlow_31</bpmn2:incoming>
+            <bpmn2:outgoing>SequenceFlow_40</bpmn2:outgoing>
+            <bpmn2:outgoing>SequenceFlow_42</bpmn2:outgoing>
+        </bpmn2:parallelGateway>
         <bpmn2:startEvent id="StartEvent_27" name="Start 1">
             <bpmn2:extensionElements>
                 <ifl:property>
@@ -764,22 +788,27 @@ File Recieved in th e MAil Notification</value>
             <bpmn2:outgoing>SequenceFlow_28</bpmn2:outgoing>
             <bpmn2:messageEventDefinition/>
         </bpmn2:startEvent>
-        <bpmn2:sequenceFlow id="SequenceFlow_31" sourceRef="CallActivity_30" targetRef="EndEvent_12"/>
+        <bpmn2:sequenceFlow id="SequenceFlow_31" sourceRef="CallActivity_30" targetRef="ParallelGateway_39"/>
+        <bpmn2:sequenceFlow id="SequenceFlow_40" name="file branch" sourceRef="ParallelGateway_39" targetRef="EndEvent_2"/>
+        <bpmn2:sequenceFlow id="SequenceFlow_42" name="Mail branch" sourceRef="ParallelGateway_39" targetRef="EndEvent_12"/>
         <bpmn2:sequenceFlow id="SequenceFlow_28" sourceRef="StartEvent_27" targetRef="CallActivity_30"/>
     </bpmn2:process>
     <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
         <bpmndi:BPMNPlane bpmnElement="Collaboration_1" id="BPMNPlane_1">
             <bpmndi:BPMNShape bpmnElement="EndEvent_2" id="BPMNShape_EndEvent_2">
-                <dc:Bounds height="32.0" width="32.0" x="681.0" y="130.0"/>
+                <dc:Bounds height="32.0" width="32.0" x="683.0" y="130.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="ParallelGateway_39" id="BPMNShape_ParallelGateway_39">
+                <dc:Bounds height="40.0" width="40.0" x="511.0" y="126.0"/>
             </bpmndi:BPMNShape>
             <bpmndi:BPMNShape bpmnElement="StartEvent_27" id="BPMNShape_StartEvent_27">
-                <dc:Bounds height="32.0" width="32.0" x="253.0" y="130.0"/>
+                <dc:Bounds height="32.0" width="32.0" x="255.0" y="130.0"/>
             </bpmndi:BPMNShape>
             <bpmndi:BPMNShape bpmnElement="EndEvent_18" id="BPMNShape_EndEvent_18">
-                <dc:Bounds height="32.0" width="32.0" x="691.0" y="292.0"/>
+                <dc:Bounds height="32.0" width="32.0" x="693.0" y="292.0"/>
             </bpmndi:BPMNShape>
             <bpmndi:BPMNShape bpmnElement="CallActivity_30" id="BPMNShape_CallActivity_30">
-                <dc:Bounds height="60.0" width="100.0" x="404.0" y="116.0"/>
+                <dc:Bounds height="60.0" width="100.0" x="367.0" y="116.0"/>
             </bpmndi:BPMNShape>
             <bpmndi:BPMNShape bpmnElement="Participant_2" id="BPMNShape_Participant_2">
                 <dc:Bounds height="140.0" width="100.0" x="900.0" y="100.0"/>
@@ -788,34 +817,43 @@ File Recieved in th e MAil Notification</value>
                 <dc:Bounds height="140.0" width="100.0" x="40.0" y="100.0"/>
             </bpmndi:BPMNShape>
             <bpmndi:BPMNShape bpmnElement="Participant_Process_1" id="BPMNShape_Participant_Process_1">
-                <dc:Bounds height="321.0" width="622.0" x="218.0" y="48.0"/>
+                <dc:Bounds height="321.0" width="622.0" x="220.0" y="48.0"/>
             </bpmndi:BPMNShape>
             <bpmndi:BPMNShape bpmnElement="EndEvent_12" id="BPMNShape_EndEvent_12">
-                <dc:Bounds height="32.0" width="32.0" x="691.0" y="209.0"/>
+                <dc:Bounds height="32.0" width="32.0" x="693.0" y="209.0"/>
             </bpmndi:BPMNShape>
             <bpmndi:BPMNShape bpmnElement="Participant_15" id="BPMNShape_Participant_15">
                 <dc:Bounds height="140.0" width="100.0" x="906.0" y="319.0"/>
             </bpmndi:BPMNShape>
             <bpmndi:BPMNEdge bpmnElement="SequenceFlow_28" id="BPMNEdge_SequenceFlow_28" sourceElement="BPMNShape_StartEvent_27" targetElement="BPMNShape_CallActivity_30">
-                <di:waypoint x="269.0" xsi:type="dc:Point" y="146.0"/>
-                <di:waypoint x="454.0" xsi:type="dc:Point" y="146.0"/>
+                <di:waypoint x="271.0" xsi:type="dc:Point" y="146.0"/>
+                <di:waypoint x="417.0" xsi:type="dc:Point" y="146.0"/>
             </bpmndi:BPMNEdge>
-            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_31" id="BPMNEdge_SequenceFlow_31" sourceElement="BPMNShape_CallActivity_30" targetElement="BPMNShape_EndEvent_12">
-                <di:waypoint x="454.0" xsi:type="dc:Point" y="146.0"/>
-                <di:waypoint x="597.5" xsi:type="dc:Point" y="146.0"/>
-                <di:waypoint x="597.5" xsi:type="dc:Point" y="225.0"/>
-                <di:waypoint x="707.0" xsi:type="dc:Point" y="225.0"/>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_40" id="BPMNEdge_SequenceFlow_40" sourceElement="BPMNShape_ParallelGateway_39" targetElement="BPMNShape_EndEvent_2">
+                <di:waypoint x="527.0" xsi:type="dc:Point" y="130.0"/>
+                <di:waypoint x="527.0" xsi:type="dc:Point" y="103.0"/>
+                <di:waypoint x="699.0" xsi:type="dc:Point" y="103.0"/>
+                <di:waypoint x="699.0" xsi:type="dc:Point" y="128.5"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_42" id="BPMNEdge_SequenceFlow_42" sourceElement="BPMNShape_ParallelGateway_39" targetElement="BPMNShape_EndEvent_12">
+                <di:waypoint x="531.0" xsi:type="dc:Point" y="165.5"/>
+                <di:waypoint x="531.0" xsi:type="dc:Point" y="227.0"/>
+                <di:waypoint x="702.0" xsi:type="dc:Point" y="227.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_31" id="BPMNEdge_SequenceFlow_31" sourceElement="BPMNShape_CallActivity_30" targetElement="BPMNShape_ParallelGateway_39">
+                <di:waypoint x="417.0" xsi:type="dc:Point" y="146.0"/>
+                <di:waypoint x="531.0" xsi:type="dc:Point" y="146.0"/>
             </bpmndi:BPMNEdge>
             <bpmndi:BPMNEdge bpmnElement="MessageFlow_6" id="BPMNEdge_MessageFlow_6" sourceElement="BPMNShape_EndEvent_2" targetElement="BPMNShape_Participant_2">
-                <di:waypoint x="697.0" xsi:type="dc:Point" y="146.0"/>
+                <di:waypoint x="699.0" xsi:type="dc:Point" y="146.0"/>
                 <di:waypoint x="950.0" xsi:type="dc:Point" y="170.0"/>
             </bpmndi:BPMNEdge>
             <bpmndi:BPMNEdge bpmnElement="MessageFlow_29" id="BPMNEdge_MessageFlow_29" sourceElement="BPMNShape_Participant_1" targetElement="BPMNShape_StartEvent_27">
                 <di:waypoint x="90.0" xsi:type="dc:Point" y="170.0"/>
-                <di:waypoint x="269.0" xsi:type="dc:Point" y="146.0"/>
+                <di:waypoint x="271.0" xsi:type="dc:Point" y="146.0"/>
             </bpmndi:BPMNEdge>
             <bpmndi:BPMNEdge bpmnElement="MessageFlow_16" id="BPMNEdge_MessageFlow_16" sourceElement="BPMNShape_EndEvent_12" targetElement="BPMNShape_Participant_15">
-                <di:waypoint x="707.0" xsi:type="dc:Point" y="225.0"/>
+                <di:waypoint x="709.0" xsi:type="dc:Point" y="225.0"/>
                 <di:waypoint x="956.0" xsi:type="dc:Point" y="389.0"/>
             </bpmndi:BPMNEdge>
         </bpmndi:BPMNPlane>
