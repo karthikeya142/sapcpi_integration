@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?><bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:ifl="http:///com.sap.ifl.model/Ifl.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1">
+    <bpmn2:collaboration id="Collaboration_1" name="Default Collaboration">
+        <bpmn2:extensionElements>
+            <ifl:property>
+                <key>namespaceMapping</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>httpSessionHandling</key>
+                <value>None</value>
+            </ifl:property>
+            <ifl:property>
+                <key>accessControlMaxAge</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>returnExceptionToSender</key>
+                <value>false</value>
+            </ifl:property>
+            <ifl:property>
+                <key>log</key>
+                <value>All events</value>
+            </ifl:property>
+            <ifl:property>
+                <key>corsEnabled</key>
+                <value>false</value>
+            </ifl:property>
+            <ifl:property>
+                <key>exposedHeaders</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>componentVersion</key>
+                <value>1.2</value>
+            </ifl:property>
+            <ifl:property>
+                <key>allowedHeaderList</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>ServerTrace</key>
+                <value>false</value>
+            </ifl:property>
+            <ifl:property>
+                <key>allowedOrigins</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>accessControlAllowCredentials</key>
+                <value>false</value>
+            </ifl:property>
+            <ifl:property>
+                <key>allowedHeaders</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>allowedMethods</key>
+                <value/>
+            </ifl:property>
+            <ifl:property>
+                <key>cmdVariantUri</key>
+                <value>ctype::IFlowVariant/cname::IFlowConfiguration/version::1.2.4</value>
+            </ifl:property>
+        </bpmn2:extensionElements>
+        <bpmn2:participant id="Participant_1" ifl:type="EndpointSender" name="Sender">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>enableBasicAuthentication</key>
+                    <value>false</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>ifl:type</key>
+                    <value>EndpointSender</value>
+                </ifl:property>
+            </bpmn2:extensionElements>
+        </bpmn2:participant>
+        <bpmn2:participant id="Participant_2" ifl:type="EndpointRecevier" name="Receiver">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>ifl:type</key>
+                    <value>EndpointRecevier</value>
+                </ifl:property>
+            </bpmn2:extensionElements>
+        </bpmn2:participant>
+        <bpmn2:participant id="Participant_Process_1" ifl:type="IntegrationProcess" name="Integration Process" processRef="Process_1">
+            <bpmn2:extensionElements/>
+        </bpmn2:participant>
+    </bpmn2:collaboration>
+    <bpmn2:process id="Process_1" name="Integration Process">
+        <bpmn2:extensionElements>
+            <ifl:property>
+                <key>transactionTimeout</key>
+                <value>30</value>
+            </ifl:property>
+            <ifl:property>
+                <key>componentVersion</key>
+                <value>1.2</value>
+            </ifl:property>
+            <ifl:property>
+                <key>cmdVariantUri</key>
+                <value>ctype::FlowElementVariant/cname::IntegrationProcess/version::1.2.1</value>
+            </ifl:property>
+            <ifl:property>
+                <key>transactionalHandling</key>
+                <value>Not Required</value>
+            </ifl:property>
+        </bpmn2:extensionElements>
+        <bpmn2:endEvent id="EndEvent_2" name="End">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>componentVersion</key>
+                    <value>1.1</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>cmdVariantUri</key>
+                    <value>ctype::FlowstepVariant/cname::MessageEndEvent/version::1.1.0</value>
+                </ifl:property>
+            </bpmn2:extensionElements>
+            <bpmn2:incoming>SequenceFlow_12</bpmn2:incoming>
+            <bpmn2:messageEventDefinition/>
+        </bpmn2:endEvent>
+        <bpmn2:callActivity id="CallActivity_7" name="Content Modifier 1">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>bodyType</key>
+                    <value>constant</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>propertyTable</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>headerTable</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>wrapContent</key>
+                    <value>ISA*00*          *00*          *ZZ*SENDERID       *ZZ*RECEIVERID     *261119*1319*U*00401*000000001*0*T*:~
+GS*PO*SENDERID*RECEIVERID*20261119*1319*1*X*004010~
+ST*850*0001~
+BEG*00*SA*PO10001**20261119~
+REF*DP*001~
+PER*BD*JOHN SMITH*TE*9876543210~
+N1*ST*ABC ELECTRONICS~
+N3*12 INDUSTRIAL ROAD~
+N4*HYDERABAD*TG*500081*IN~
+PO1*1*10*EA*250.00**VP*LAPTOP01~
+PID*F****DELL LAPTOP~
+PO1*2*5*EA*150.00**VP*MOUSE01~
+PID*F****WIRELESS MOUSE~
+CTT*2~
+SE*11*0001~
+ST*850*0002~
+BEG*00*SA*PO10002**20261119~
+REF*DP*002~
+PER*BD*DAVID KUMAR*TE*9876543211~
+N1*ST*XYZ TECHNOLOGIES~
+N3*45 SOFTWARE PARK~
+N4*HYDERABAD*TG*500032*IN~
+PO1*1*20*EA*500.00**VP*MONITOR01~
+PID*F****LED MONITOR~
+PO1*2*10*EA*750.00**VP*KEYBOARD01~
+PID*F****MECHANICAL KEYBOARD~
+CTT*2~
+SE*11*0002~
+GE*2*1~
+IEA*1*000000001~</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>componentVersion</key>
+                    <value>1.6</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>activityType</key>
+                    <value>Enricher</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>cmdVariantUri</key>
+                    <value>ctype::FlowstepVariant/cname::Enricher/version::1.6.6</value>
+                </ifl:property>
+            </bpmn2:extensionElements>
+            <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+            <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+        </bpmn2:callActivity>
+        <bpmn2:callActivity id="CallActivity_11" name="EDI Splitter 1">
+            <bpmn2:extensionElements>
+                <ifl:property>
+                    <key>edifactSourceEncoding</key>
+                    <value>UTF-8</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>tradacomsHeaderName</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactTransactionMode</key>
+                    <value>interchange</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactUnaRequired</key>
+                    <value>false</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>tradacomsSplitPreference</key>
+                    <value>NoSplit</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>vdaSourceEncoding</key>
+                    <value>ISO-8859-1</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12ExcludeAk3Ak4</key>
+                    <value>false</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12UniqueTSNumber</key>
+                    <value>notRequired</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12UniqueInterchangeNumber</key>
+                    <value>notRequired</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>vdaHeaderName</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>tradacomsSchemaTable</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12SchemaTable</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>tradacomsSourceEncoding</key>
+                    <value>ISO-8859-1</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>vdaEdiSchemaSource</key>
+                    <value>integrationProject</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactValidate</key>
+                    <value>envelopAndMessage</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactUniqueInterchangeNumber</key>
+                    <value>notRequired</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12CreateAck</key>
+                    <value>notRequired</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>componentVersion</key>
+                    <value>2.13</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12NumberRangeName</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactDecimalCharacter</key>
+                    <value>dot</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12TSNumberRangeName</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12CustomizeEnvelope</key>
+                    <value>fromIncomingPayload</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactInterchangeNumberFrom</key>
+                    <value>useFromEDIMessage</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactEdiSchemaSource</key>
+                    <value>IntegrationProject</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>cmdVariantUri</key>
+                    <value>ctype::FlowstepVariant/cname::EDISplitter/version::2.13.0</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>vdaSplitPreference</key>
+                    <value>noSplit</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactNumberRangeName</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactValidateMessage</key>
+                    <value>false</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12TSNumberFrom</key>
+                    <value>predefined</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12InterchangeNumberFrom</key>
+                    <value>useFromEDIMessage</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12UniqueFGNumber</key>
+                    <value>notRequired</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12EdiSchemaSource</key>
+                    <value>IntegrationProject</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12ValidateMessageOptions</key>
+                    <value>none</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>parallelProcessing</key>
+                    <value>false</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12FGNumberRangeName</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactContrlVersion</key>
+                    <value>defaultVersion</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactSchemaTable</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12SourceEncoding</key>
+                    <value>UTF-8</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactSendInvalidMessages</key>
+                    <value>false</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactCreateAck</key>
+                    <value>notRequired</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>tradacomsEdiSchemaSource</key>
+                    <value>IntegrationProject</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12SendInvalidMessages</key>
+                    <value>false</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactHeaderName</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>splitType</key>
+                    <value>EDISplitter</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>timeOut</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12TransactionMode</key>
+                    <value>interchange</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12HeaderName</key>
+                    <value/>
+                </ifl:property>
+                <ifl:property>
+                    <key>x12FunctionalGroupNumberFrom</key>
+                    <value>predefined</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>edifactCustomizeEnvelope</key>
+                    <value>fromIncomingPayload</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>activityType</key>
+                    <value>Splitter</value>
+                </ifl:property>
+                <ifl:property>
+                    <key>vdaSchemaTable</key>
+                    <value/>
+                </ifl:property>
+            </bpmn2:extensionElements>
+            <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+            <bpmn2:outgoing>SequenceFlow_12</bpmn2:outgoing>
+        </bpmn2:callActivity>
+        <bpmn2:startEvent id="StartEvent_8" name="Start Timer 1">
+            <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
+            <bpmn2:timerEventDefinition id="TimerEventDefinition_439736">
+                <bpmn2:extensionElements>
+                    <ifl:property>
+                        <key>scheduleKey</key>
+                        <value>&lt;row&gt;&lt;cell&gt;dateType&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;timeType&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;dayValue&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;monthValue&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;yearValue&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;onWeekly&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;onMonthly&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;OnEveryMinute&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;fromInterval&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;toInterval&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;timeZone&lt;/cell&gt;&lt;cell&gt;( UTC 0:00 ) Greenwich Mean Time(Etc/GMT)&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;secondValue&lt;/cell&gt;&lt;cell&gt;0&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;minutesValue&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;hourValue&lt;/cell&gt;&lt;cell&gt;&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;triggerType&lt;/cell&gt;&lt;cell&gt;simple&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;noOfSchedules&lt;/cell&gt;&lt;cell&gt;1&lt;/cell&gt;&lt;/row&gt;&lt;row&gt;&lt;cell&gt;schedule1&lt;/cell&gt;&lt;cell&gt;fireNow=true&lt;/cell&gt;&lt;/row&gt;</value>
+                    </ifl:property>
+                    <ifl:property>
+                        <key>componentVersion</key>
+                        <value>1.4</value>
+                    </ifl:property>
+                    <ifl:property>
+                        <key>cmdVariantUri</key>
+                        <value>ctype::FlowstepVariant/cname::intermediatetimer/version::1.4.0</value>
+                    </ifl:property>
+                    <ifl:property>
+                        <key>activityType</key>
+                        <value>StartTimerEvent</value>
+                    </ifl:property>
+                </bpmn2:extensionElements>
+            </bpmn2:timerEventDefinition>
+        </bpmn2:startEvent>
+        <bpmn2:sequenceFlow id="SequenceFlow_9" sourceRef="CallActivity_7" targetRef="CallActivity_11"/>
+        <bpmn2:sequenceFlow id="SequenceFlow_12" sourceRef="CallActivity_11" targetRef="EndEvent_2"/>
+        <bpmn2:sequenceFlow id="SequenceFlow_10" sourceRef="StartEvent_8" targetRef="CallActivity_7"/>
+    </bpmn2:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Default Collaboration Diagram">
+        <bpmndi:BPMNPlane bpmnElement="Collaboration_1" id="BPMNPlane_1">
+            <bpmndi:BPMNShape bpmnElement="EndEvent_2" id="BPMNShape_EndEvent_2">
+                <dc:Bounds height="32.0" width="32.0" x="722.0" y="142.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="CallActivity_11" id="BPMNShape_CallActivity_11">
+                <dc:Bounds height="60.0" width="100.0" x="534.0" y="122.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="StartEvent_8" id="BPMNShape_StartEvent_8">
+                <dc:Bounds height="32.0" width="32.0" x="258.0" y="136.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="CallActivity_7" id="BPMNShape_CallActivity_7">
+                <dc:Bounds height="60.0" width="100.0" x="384.0" y="122.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Participant_2" id="BPMNShape_Participant_2">
+                <dc:Bounds height="140.0" width="100.0" x="900.0" y="100.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Participant_1" id="BPMNShape_Participant_1">
+                <dc:Bounds height="140.0" width="100.0" x="40.0" y="100.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="Participant_Process_1" id="BPMNShape_Participant_Process_1">
+                <dc:Bounds height="220.0" width="618.0" x="220.0" y="60.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_9" id="BPMNEdge_SequenceFlow_9" sourceElement="BPMNShape_CallActivity_7" targetElement="BPMNShape_CallActivity_11">
+                <di:waypoint x="434.0" xsi:type="dc:Point" y="152.0"/>
+                <di:waypoint x="584.0" xsi:type="dc:Point" y="152.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_10" id="BPMNEdge_SequenceFlow_10" sourceElement="BPMNShape_StartEvent_8" targetElement="BPMNShape_CallActivity_7">
+                <di:waypoint x="274.0" xsi:type="dc:Point" y="152.0"/>
+                <di:waypoint x="384.5" xsi:type="dc:Point" y="152.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="SequenceFlow_12" id="BPMNEdge_SequenceFlow_12" sourceElement="BPMNShape_CallActivity_11" targetElement="BPMNShape_EndEvent_2">
+                <di:waypoint x="584.0" xsi:type="dc:Point" y="155.0"/>
+                <di:waypoint x="738.0" xsi:type="dc:Point" y="155.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
